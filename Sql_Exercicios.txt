@@ -1,4 +1,4 @@
-// EXERCICIO 1 //
+	// EXERCICIO 1 //
 
 	SELECT * FROM Funcionario
 
@@ -37,8 +37,6 @@
 
 	// EXERCICIO 10 //
 
-	
-	
 	min(QtdeHoras) menor_hora
 	
 	FROM TrabalhaProjeto
