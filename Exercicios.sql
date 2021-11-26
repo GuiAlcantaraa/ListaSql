@@ -53,3 +53,18 @@
 	FROM TrabalhaProjeto
 	GROUP BY ProjetoID
 
+	// EXERCICIO 12 //
+
+	// EXERCICIO 13 //
+
+	// EXERCICIO 14 //
+
+	// EXERCICIO 15 //
+	
+	SELECT 
+	DEPENDENTE.DependenteID,
+	DEPENDENTE.Nome
+	FROM Dependente
+	inner join funcionario 
+	on Dependente.DependenteId = FUNCIONARIO.FUNCIONARIOID
+
