@@ -40,5 +40,66 @@
 	min(QtdeHoras) menor_hora
 	
 	FROM TrabalhaProjeto
+
+
+	// EXERCICIO 11 //
+
+
+	// EXERCICIO 12 //
+	select sexo, count(FuncionarioID) from Funcionario
+	group by sexo
+
+	// EXERCICIO 13 //
+
+
+	// EXERCICIO 17 //
+
+	select*from Projeto
+	INNER JOIN TrabalhaProjeto
+	ON TrabalhaProjeto.ProjetoID = Projeto.ProjetoID
+	INNER JOIN Funcionario
+	ON TrabalhaProjeto.FuncionarioID = Funcionario.FuncionarioID
+
+
+	// EXERCICIO 18 //
+
+	select *from Funcionario
+	left join Dependente
+	on Funcionario.FuncionarioID = Dependente.FuncionarioID
+	where Dependente.DependenteID is null
+
+	// EXERCICIO 19 //
+
+	select 
+	Funcionario.Nome,
+	count (Dependente.DependenteID) QuantidadeDeDependentes
+	from Funcionario
+	inner join Dependente
+	on Funcionario.FuncionarioID = Dependente.FuncionarioID
+	group by Funcionario.Nome
+
+	// EXERCICIO 20 //
+
+	select 
+	Funcionario.Nome,
+	ISNULL(sum(TrabalhaProjeto.QtdeHoras), 0) HorasTrabalhadas
+	from  Funcionario
+	left join TrabalhaProjeto
+	on Funcionario.FuncionarioID = TrabalhaProjeto.FuncionarioID
+	group by Funcionario.Nome
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	
 	
