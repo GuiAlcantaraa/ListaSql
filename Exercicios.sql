@@ -1,83 +1,104 @@
+USE BD040684
 
 	
-	// EXERCICIO 1 //
+	//EXERCICIO 1 (OK)//
 
 	SELECT * FROM Funcionario
 
-	// EXERCICIO 2 //
+	//EXERCICIO 2 (OK)//
 
 	SELECT NOME, CPF
 	FROM Funcionario
 
-	// EXERCICIO 3 //
+	//EXERCICIO 3 (OK)//
 
 	SELECT * FROM Funcionario (NOLOCK) WHERE Sexo = 'F'
 
-	// EXERCICIO 4 //
+	//EXERCICIO 4 (OK)//
 
 	SELECT * FROM Funcionario (NOLOCK) WHERE Sexo = 'M'
 
-	// EXERCICIO 5 //
+	//EXERCICIO 5 (OK)//
 
 	SELECT * FROM Dependente (NOLOCK) WHERE Sexo = 'M'
 
-	// EXERCICIO 6 //
+	//EXERCICIO 6 (OK)//
 
 	SELECT * FROM Funcionario (NOLOCK) WHERE Nome LIKE 'M%'
 
-	// EXERCICIO 7 //
+	//EXERCICIO 7 (OK)//
 
 	SELECT * FROM Dependente (NOLOCK) WHERE Nome LIKE 'P%'
 
-	// EXERCICIO 8 //
+	//EXERCICIO 8 (OK)//
 
 	SELECT * FROM Funcionario (NOLOCK) WHERE Nome LIKE '%CRUZ%'
 
-	// EXERCICIO 9 //
+	//EXERCICIO 9 (OK)//
 
 	SELECT * FROM Dependente (NOLOCK) WHERE Nome LIKE '%CRUZ'
 
-	// EXERCICIO 10 //
+	//EXERCICIO 10 (OK)//
 
 	select 
 	Projeto.Nome,
 	Min(TrabalhaProjeto.QtdeHoras)	
 	from TrabalhaProjeto
-	inner join Projeto on Projeto.ProjetoID = TrabalhaProjeto.ProjetoID
+	inner join Projeto 
+	on Projeto.ProjetoID = TrabalhaProjeto.ProjetoID
 	group by Projeto.Nome
 
-	// EXERCICIO 11 //
+	//EXERCICIO 11 (OK)//
 
 	select 
 	Projeto.Nome,
-	AVG(TrabalhaProjeto.QtdeHoras)
+	AVG(TrabalhaProjeto.QtdeHoras) as MediaHoras
 	from TrabalhaProjeto
 	inner join Projeto on Projeto.ProjetoID = TrabalhaProjeto.ProjetoID
 	group by Projeto.Nome
 
 
-	// EXERCICIO 12 //
+	//EXERCICIO 12 (OK)//
 
-	select sexo, count(FuncionarioID) as Quantidade
+	select Sexo, 
+	count(FuncionarioID) as Quantidade
 	from Funcionario
 	group by sexo
 
-	// EXERCICIO 13 //
+	//EXERCICIO 13 (OK)//
 
 	select top 2
 	Nome,
 	DataNascimento
-	from Funcionario order by DataNascimento
+	from Funcionario 
+	order by DataNascimento
 
-	// EXERCICIO 14 //
+	//EXERCICIO 14 (NÃO)//
 
-	// EXERCICIO 15 //
+	SELECT TOP 3
+	Nome,
+	DataNascimento
+	from Funcionario
+	where Sexo ='m' 
+	order by DataNascimento desc
 
-	// EXERCICIO 16 //
+	//EXERCICIO 15 (OK)//
 
+	SELECT  
+	Dependente.DependenteID,
+	Dependente.Nome,
+	FUNCIONARIO.FuncionarioID,
+	Funcionario.Nome
+	FROM Dependente
+	inner JOIN Funcionario
+	ON Funcionario.FuncionarioID = Dependente.FuncionarioID
 
+	//EXERCICIO 16 (NÃO)//
 
-	// EXERCICIO 17 //
+	SELECT * FROM Funcionario
+	INNER JOIN
+
+	//EXERCICIO 17 (OK)//
 
 	select*from Projeto
 	INNER JOIN TrabalhaProjeto
@@ -86,14 +107,14 @@
 	ON TrabalhaProjeto.FuncionarioID = Funcionario.FuncionarioID
 
 
-	// EXERCICIO 18 //
+	//EXERCICIO 18 (OK)//
 
 	select *from Funcionario
 	left join Dependente
 	on Funcionario.FuncionarioID = Dependente.FuncionarioID
 	where Dependente.DependenteID is null
 
-	// EXERCICIO 19 //
+	//EXERCICIO 19 (OK)//
 
 	select 
 	Funcionario.Nome,
@@ -103,7 +124,7 @@
 	on Funcionario.FuncionarioID = Dependente.FuncionarioID
 	group by Funcionario.Nome
 
-	// EXERCICIO 20 //
+	//EXERCICIO 20 (OK)//
 
 	select 
 	Funcionario.Nome,
@@ -113,58 +134,63 @@
 	on Funcionario.FuncionarioID = TrabalhaProjeto.FuncionarioID
 	group by Funcionario.Nome
 
+	//EXERCICIO 21 (NÃO)//
 
-	// EXERCICIO 25 //
+	//EXERCICIO 22 (NÃO)//
 
-		select Month(DataNascimento) Mes,
-				count(FuncionarioID) QTDE
-		from Funcionario
-		group by Month(DataNascimento) 
-		order by Mes
+	//EXERCICIO 23 (NÃO)//
+
+	//EXERCICIO 24 (NÃO)//
 
 
-	// EXERCICIO 26 //
+	//EXERCICIO 25 (OK)//
+
+	select Month(DataNascimento) Mes,
+	count(FuncionarioID) QTDE
+	from Funcionario
+	group by Month(DataNascimento) 
+	order by Mes
+
+
+	//EXERCICIO 26 (OK)//
 
 	select 
-		Year(DataNascimento) Ano,
-		Month(DataNascimento) Mes,
-		count(FuncionarioID) QTDE
+	Year(DataNascimento) Ano,
+	Month(DataNascimento) Mes,
+	count(FuncionarioID) QTDE
 	from Funcionario
 	group by Month(DataNascimento), Year(DataNascimento)
 	order by Ano
 
 
-	// EXERCICIO 27 //
+	//EXERCICIO 27 (OK)//
 
 	select Nome,
-			DataNascimento,
-			DATEDIFF(month, DataNascimento, getdate()) / 12
+	DataNascimento,
+	DATEDIFF(month, DataNascimento, getdate()) / 12
 	FROM Funcionario
 
 
-	// EXERCICIO 28 //
+	//EXERCICIO 28 (OK)//
 
 	create view VwFuncionarios
-
 	as 
 	select Nome,
-			FuncionarioID,
-			DataNascimento
+	FuncionarioID,
+	DataNascimento
 	from Funcionario
 
 	select * from VwFuncionarios
 
+	//EXERCICIO 29 (NÃO)//
+
+	//EXERCICIO 30 (NÃO)//
+
+	//EXERCICIO 31 (NÃO)//
+
+	//EXERCICIO 32 (NÃO)//
+
+	//EXERCICIO 33 (NÃO)//
 
 
 
-
-
-
-
-
-
-
-
-
-	
-	
